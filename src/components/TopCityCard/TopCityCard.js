@@ -17,20 +17,20 @@ const TopCityCard = (props) => {
 
         const apiKey = process.env.REACT_APP_WEATHERSTACK_API_KEY
 
-        if (localStorage.getItem(props.data.name) &&  localStorage.getItem(props.data.name) != "{}") {
-          setCityData(JSON.parse(localStorage.getItem(props.data.name)))
+        if (localStorage.getItem(props.data) &&  localStorage.getItem(props.data) != "{}") {
+          setCityData(JSON.parse(localStorage.getItem(props.data)))
         } else {
           axios
-          .get(`http://api.weatherstack.com/current?access_key=${apiKey}&query=${props.data.name}&units=f`)
+          .get(`http://api.weatherstack.com/current?access_key=${apiKey}&query=${props.data}&units=f`)
           .then(res => {
   
             if (!res.data.error){
               setCityData(res.data)
-              localStorage.setItem(props.data.name, JSON.stringify(res.data))
+              localStorage.setItem(props.data, JSON.stringify(res.data))
 
             } else {
               // ran out of API calls had to use fake data
-              setCityData({current:{city: props.data.name ,temperature:100}})
+              setCityData({current:{city: props.data ,temperature:100}})
             }
   
             
@@ -53,15 +53,15 @@ const TopCityCard = (props) => {
 
     const deleteTopCity = () => {
       let current = data.topCities
-      current = current.filter(city => city.name !== props.data.name)
+      current = current.filter(city => city !== props.data)
       data.setTopCities(current)
       // Set to localStorage
       localStorage.setItem('topCities', JSON.stringify(current))
     }
 
     const addFavorite = () => {
-      data.setFavoriteCities([...data.favoriteCities, props.data.name])
-      localStorage.setItem('favoriteCities', JSON.stringify([...data.favoriteCities, props.data.name]))
+      data.setFavoriteCities([...data.favoriteCities, props.data])
+      localStorage.setItem('favoriteCities', JSON.stringify([...data.favoriteCities, props.data]))
     }
 
 
@@ -70,8 +70,8 @@ const TopCityCard = (props) => {
     return (<>
       {cityData.current ?
         <CardContainer>
-            <Link to={`/${props.data.name}`} >
-              <Title>{props.data.name}</Title> <Temp> {cityData.current.temperature} </Temp> 
+            <Link to={`/${props.data}`} >
+              <Title>{props.data}</Title> <Temp> {cityData.current.temperature} </Temp> 
             </Link>
              <button onClick={addFavorite} >♥️</button>
             <button onClick={deleteTopCity}>x</button>

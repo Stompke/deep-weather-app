@@ -40,20 +40,9 @@ const FavoriteCityCard = props => {
       },[])
       
 
-      // Does not need to run when local storage is already there
-      
-      // useEffect(() => {
-      //   localStorage.setItem(props.data.name, JSON.stringify(cityData))
-      //   // console.log('setting city LS: ', cityData)
-      // },[cityData])
-
 
 
     const deleteFavoriteCity = () => {
-    //   let current = data.topCities
-    //   current = current.filter(city => city.name !== props.data)
-    //   data.setTopCities(current)
-
         const newFavorites = data.favoriteCities.filter(item => item != props.data)
         data.setFavoriteCities(newFavorites)
 

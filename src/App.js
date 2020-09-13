@@ -13,9 +13,9 @@ import Dashboard from './components/Dashboard/Dashboard';
 function App() {
 
   const largestCities = [
-    {name: "New York"},
-    {name: "Los Angeles"},
-    {name: "Chicago"},
+  "New York",
+    "Los Angeles",
+    "Chicago",
     // {name: "Houston", temp: null},
     // {name: "Phoenix", temp: null},
     // {name: "Philadelphia", temp: null},
@@ -23,7 +23,7 @@ function App() {
     // {name: "San Diego", temp: null},
     // {name: "Dallas", temp: null},
     // {name: "San Jose", temp: null},
-    {name: "Austin"},
+    "Austin",
     // {name: "Jacksonville", temp: null},
     // {name: "Fort Worth", temp: null},
     // {name: "Columbus", temp: null},
@@ -34,20 +34,23 @@ function App() {
     "Chandler"
   ]
 
-  largestCities.sort(function(a, b) {
-    const nameA = a.name.toUpperCase();
-    const nameB = b.name.toUpperCase();
+  largestCities.sort()
 
-    if(nameA < nameB) {
-      return -1
-    }
-    if (nameA > nameB) {
-      return 1;
-    }
 
-    return 0 
+  // largestCities.sort(function(a, b) {
+  //   const nameA = a.name.toUpperCase();
+  //   const nameB = b.name.toUpperCase();
 
-  });
+  //   if(nameA < nameB) {
+  //     return -1
+  //   }
+  //   if (nameA > nameB) {
+  //     return 1;
+  //   }
+
+  //   return 0 
+
+  // });
 
 
 
