@@ -3,7 +3,8 @@ import UserContext from '../../utils/MyContext';
 import axios from 'axios';
 
 // COMPONENTS
-import CityCard from '../CityCard/CityCard';
+import TopCityCard from '../TopCityCard/TopCityCard';
+import FavoriteCityCard from '../FavoriteCityCard/FavoriteCityCard';
 
 const Dashboard = () => {
 
@@ -35,13 +36,13 @@ const Dashboard = () => {
             <h2>Search:</h2>
             <input value={searchQuery} onChange={onChangeHandler} onSubmit={onSubmitHandler} />
             <button onClick={onSubmitHandler}>Go</button>
-            {searchCity.location && <CityCard key={searchCity.location.name} data={searchCity.location} />}
+            {searchCity.location && <TopCityCard key={searchCity.location.name} data={searchCity.location} />}
 
             <h2>Favorite Cities</h2>
-            {favoriteCities.map(item => <CityCard key={item} data={item} />)}
+            {favoriteCities.map(item => <FavoriteCityCard key={item} data={item} />)}
 
             <h2>Top Cities</h2>
-            {topCities.map(item => <CityCard key={item.name} data={item} />)}
+            {topCities.map(item => <TopCityCard key={item.name} data={item} />)}
         </>
     )
 }

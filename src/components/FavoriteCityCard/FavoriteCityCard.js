@@ -3,34 +3,32 @@ import UserContext from '../../utils/MyContext'
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-import {Title, Temp, CardContainer} from './CityCardStyles';
+import {Title, Temp, CardContainer} from '../FavoriteCityCard/FavoriteCityCardStyles';
 
-const CityCard = (props) => {
+const FavoriteCityCard = props => {
 
     const data = useContext(UserContext)
 
     const [cityData, setCityData] = useState({})
-
-
     // Possiby change to useReducer
     useEffect(() => {
 
         const apiKey = process.env.REACT_APP_WEATHERSTACK_API_KEY
 
-        if (localStorage.getItem(props.data.name) &&  localStorage.getItem(props.data.name) != "{}") {
-          setCityData(JSON.parse(localStorage.getItem(props.data.name)))
+        if (localStorage.getItem(props.data) &&  localStorage.getItem(props.data) != "{}") {
+          setCityData(JSON.parse(localStorage.getItem(props.data)))
         } else {
           axios
-          .get(`http://api.weatherstack.com/current?access_key=${apiKey}&query=${props.data.name}&units=f`)
+          .get(`http://api.weatherstack.com/current?access_key=${apiKey}&query=${props.data}&units=f`)
           .then(res => {
   
             if (!res.data.error){
               setCityData(res.data)
-              localStorage.setItem(props.data.name, JSON.stringify(res.data))
+              localStorage.setItem(props.data, JSON.stringify(res.data))
 
             } else {
               // ran out of API calls had to use fake data
-              setCityData({current:{city: props.data.name ,temperature:100}})
+              setCityData({current:{city: props.data ,temperature:100, isFake: true}})
             }
   
             
@@ -51,9 +49,9 @@ const CityCard = (props) => {
 
 
 
-    const deleteTopCity = () => {
+    const deleteFavoriteCity = () => {
       let current = data.topCities
-      current = current.filter(city => city.name !== props.data.name)
+      current = current.filter(city => city.name !== props.data)
       data.setTopCities(current)
       // Set to localStorage
       localStorage.setItem('topCities', JSON.stringify(current))
@@ -61,7 +59,7 @@ const CityCard = (props) => {
 
     const addFavorite = () => {
       let favorites = data.favoriteCities
-      favorites.push({name: props.data.name})
+      favorites.push({name: props.data})
       console.log(favorites)
       data.setFavoriteCities(favorites)
 
@@ -74,15 +72,15 @@ const CityCard = (props) => {
     return (<>
       {cityData.current ?
         <CardContainer>
-            <Link to={`/${props.data.name}`} >
-              <Title>{props.data.name}</Title> <Temp> {cityData.current.temperature} </Temp> 
+            <Link to={`/${props.data}`} >
+              <Title>{props.data}</Title> <Temp> {cityData.current.temperature} </Temp> 
             </Link>
-             <button onClick={addFavorite} >♥️</button>
-            <button onClick={deleteTopCity}>x</button>
+
+            <button onClick={deleteFavoriteCity}>x</button>
         </CardContainer>
         : ""}
         </>
     )
 }
 
-export default CityCard
+export default FavoriteCityCard;
