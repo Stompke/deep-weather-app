@@ -30,6 +30,10 @@ function App() {
     // {name: "Charlotte", temp: null}
   ]
 
+  const favoriteCitiesInit = [
+    "Chandler"
+  ]
+
   largestCities.sort(function(a, b) {
     const nameA = a.name.toUpperCase();
     const nameB = b.name.toUpperCase();
@@ -48,36 +52,13 @@ function App() {
 
 
   const [topCities, setTopCities] = useState( localStorage.getItem('topCities') ? JSON.parse(localStorage.getItem('topCities')) : largestCities );
-
-  // const [topCities, setTopCities] = useState(() => {
-  //   if(localStorage.getItem('topCities')){
-  //     JSON.parse(localStorage.getItem('topCities'))
-  //   } else {
-  //     largestCities
-  //   }
-  // });
+  const [favoriteCities, setFavoriteCities] = useState( localStorage.getItem('favoriteCities') ? JSON.parse(localStorage.getItem('favoriteCities')) : favoriteCitiesInit );
 
 
-  const value = { topCities, setTopCities };
+
+  const value = { topCities, setTopCities, favoriteCities, setFavoriteCities };
 
 
-  // useEffect(() => {
-  //   const apiKey = process.env.REACT_APP_WEATHERSTACK_API_KEY
-  //   axios
-  //   .get(`http://api.weatherstack.com/current?access_key=${apiKey}&query=New York&units=f`)
-  //   .then(res => {
-  //     console.log(res)
-  //   })
-  //   .catch( err => {
-  //     console.log(err)
-  //   })
-  // },[])
-
-  // updateItem = () => {
-  //   setTopCities(topCities => {
-  //     const list = 
-  //   })
-  // }
 
   return (
     <UserProvider  value={value}>

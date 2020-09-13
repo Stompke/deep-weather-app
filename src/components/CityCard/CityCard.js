@@ -17,7 +17,7 @@ const CityCard = (props) => {
 
         const apiKey = process.env.REACT_APP_WEATHERSTACK_API_KEY
 
-        if (localStorage.getItem(props.data.name)) {
+        if (localStorage.getItem(props.data.name) &&  localStorage.getItem(props.data.name) != "{}") {
           setCityData(JSON.parse(localStorage.getItem(props.data.name)))
         } else {
           axios
@@ -26,7 +26,10 @@ const CityCard = (props) => {
   
             if (!res.data.error){
               setCityData(res.data)
+              localStorage.setItem(props.data.name, JSON.stringify(res.data))
+
             } else {
+              // ran out of API calls had to use fake data
               setCityData({current:{city: props.data.name ,temperature:100}})
             }
   
@@ -40,10 +43,11 @@ const CityCard = (props) => {
       
 
       // Does not need to run when local storage is already there
-      useEffect(() => {
-        localStorage.setItem(props.data.name, JSON.stringify(cityData))
-        // console.log('setting city LS: ', cityData)
-      },[cityData])
+      
+      // useEffect(() => {
+      //   localStorage.setItem(props.data.name, JSON.stringify(cityData))
+      //   // console.log('setting city LS: ', cityData)
+      // },[cityData])
 
 
 
@@ -55,12 +59,25 @@ const CityCard = (props) => {
       localStorage.setItem('topCities', JSON.stringify(current))
     }
 
+    const addFavorite = () => {
+      let favorites = data.favoriteCities
+      favorites.push({name: props.data.name})
+      console.log(favorites)
+      data.setFavoriteCities(favorites)
+
+      localStorage.setItem('favoriteCities', JSON.stringify(favorites))
+    }
+
+
+  
+
     return (<>
       {cityData.current ?
         <CardContainer>
             <Link to={`/${props.data.name}`} >
               <Title>{props.data.name}</Title> <Temp> {cityData.current.temperature} </Temp> 
             </Link>
+             <button onClick={addFavorite} >♥️</button>
             <button onClick={deleteTopCity}>x</button>
         </CardContainer>
         : ""}

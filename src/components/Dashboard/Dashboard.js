@@ -10,7 +10,7 @@ const Dashboard = () => {
     const [ searchQuery, setSearchQuery ] = useState('')
     const [ searchCity, setSearchCity ] = useState({})
 
-    const {topCities} = useContext(UserContext)
+    const {topCities, favoriteCities} = useContext(UserContext)
 
     const onChangeHandler = e => {
         setSearchQuery(e.target.value)
@@ -36,6 +36,10 @@ const Dashboard = () => {
             <input value={searchQuery} onChange={onChangeHandler} onSubmit={onSubmitHandler} />
             <button onClick={onSubmitHandler}>Go</button>
             {searchCity.location && <CityCard key={searchCity.location.name} data={searchCity.location} />}
+
+            <h2>Favorite Cities</h2>
+            {favoriteCities.map(item => <CityCard key={item} data={item} />)}
+
             <h2>Top Cities</h2>
             {topCities.map(item => <CityCard key={item.name} data={item} />)}
         </>
