@@ -60,11 +60,7 @@ const TopCityCard = (props) => {
     }
 
     const addFavorite = () => {
-      // let favorites = data.favoriteCities
-      // favorites.push(props.data.name)
-      // console.log(favorites)
       data.setFavoriteCities([...data.favoriteCities, props.data.name])
-
       localStorage.setItem('favoriteCities', JSON.stringify([...data.favoriteCities, props.data.name]))
     }
 

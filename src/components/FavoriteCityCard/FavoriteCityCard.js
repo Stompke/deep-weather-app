@@ -50,21 +50,20 @@ const FavoriteCityCard = props => {
 
 
     const deleteFavoriteCity = () => {
-      let current = data.topCities
-      current = current.filter(city => city.name !== props.data)
-      data.setTopCities(current)
+    //   let current = data.topCities
+    //   current = current.filter(city => city.name !== props.data)
+    //   data.setTopCities(current)
+
+        const newFavorites = data.favoriteCities.filter(item => item != props.data)
+        data.setFavoriteCities(newFavorites)
+
       // Set to localStorage
-      localStorage.setItem('topCities', JSON.stringify(current))
+      localStorage.setItem('favoriteCities', JSON.stringify(newFavorites))
     }
-
     const addFavorite = () => {
-      let favorites = data.favoriteCities
-      favorites.push({name: props.data})
-      console.log(favorites)
-      data.setFavoriteCities(favorites)
-
-      localStorage.setItem('favoriteCities', JSON.stringify(favorites))
-    }
+        data.setFavoriteCities([...data.favoriteCities, props.data.name])
+        localStorage.setItem('favoriteCities', JSON.stringify([...data.favoriteCities, props.data.name]))
+      }
 
 
   
