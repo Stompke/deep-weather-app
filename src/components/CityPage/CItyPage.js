@@ -38,7 +38,7 @@ const CityPage = () => {
         <Container>  
             <div>
                 <h1>{city}</h1> 
-                <h4>{cityData.location.region}</h4>
+    <h4>{cityData.location.region}{cityData.location.region && ","} {cityData.location.country}</h4>
                 <p>Data Received at: {cityData.location.localtime}</p>
             </div>
 

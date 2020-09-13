@@ -1,23 +1,35 @@
 import React, { useState } from 'react';
 
+
 const CityNotes = props => {
 
     const [ notes, setNotes ] = useState(props.cityData.notes)
-    const [ editing, setEditing ] = useState(true)
+    const [ editing, setEditing ] = useState(false)
 
     const editHandler = () => {
         setEditing(!editing)
+
+        // Set Local Storage
+        localStorage.setItem(props.cityData.location.name, 
+            JSON.stringify(
+                {
+                    ...props.cityData,
+                    notes: notes
+                }
+            ))
+
+        // Set state  
         props.setCityData({
             ...props.cityData,
             notes: notes
         })
+
     }
 
     const onChangeHandler = e => {
         setNotes(e.target.value)
     }
 
-    // console.log(cityData)
 
     return (
         <>

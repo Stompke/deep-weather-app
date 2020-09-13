@@ -5,9 +5,9 @@
 - [✅] Alpha Order
 - [✅] Temp for each
 - [✅] User can delete from city list
-- [] Click on City to view more data/info
-- [] Ability to write/edit/delete notes on single city data page
-- [] Search field to search for other cities
+- [✅] Click on City to view more data/info
+- [✅] Ability to write/edit/delete notes on single city data page
+- [✅] Search field to search for other cities
 - [] Add/ Remove Favorite Cities
 - [] Works Offline
 
