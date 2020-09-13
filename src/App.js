@@ -7,7 +7,6 @@ import { UserProvider } from './utils/MyContext';
 
 
 // Components
-import CityCard from './components/CityCard/CityCard';
 import CityPage from './components/CityPage/CityPage';
 import Dashboard from './components/Dashboard/Dashboard';
 
@@ -17,18 +16,18 @@ function App() {
     {name: "New York", temp: 32},
     {name: "Los Angeles", temp: null},
     {name: "Chicago", temp: null},
-    {name: "Houston", temp: null},
-    {name: "Phoenix", temp: null},
-    {name: "Philadelphia", temp: null},
-    {name: "San Antonio", temp: null},
-    {name: "San Diego", temp: null},
-    {name: "Dallas", temp: null},
-    {name: "San Jose", temp: null},
+    // {name: "Houston", temp: null},
+    // {name: "Phoenix", temp: null},
+    // {name: "Philadelphia", temp: null},
+    // {name: "San Antonio", temp: null},
+    // {name: "San Diego", temp: null},
+    // {name: "Dallas", temp: null},
+    // {name: "San Jose", temp: null},
     {name: "Austin", temp: 89},
-    {name: "Jacksonville", temp: null},
-    {name: "Fort Worth", temp: null},
-    {name: "Columbus", temp: null},
-    {name: "Charlotte", temp: null}
+    // {name: "Jacksonville", temp: null},
+    // {name: "Fort Worth", temp: null},
+    // {name: "Columbus", temp: null},
+    // {name: "Charlotte", temp: null}
   ]
 
   largestCities.sort(function(a, b) {
@@ -46,21 +45,33 @@ function App() {
 
   });
 
-  const [topCities, setTopCities] = useState(largestCities);
+
+
+  const [topCities, setTopCities] = useState( localStorage.getItem('topCities') ? JSON.parse(localStorage.getItem('topCities')) : largestCities );
+
+  // const [topCities, setTopCities] = useState(() => {
+  //   if(localStorage.getItem('topCities')){
+  //     JSON.parse(localStorage.getItem('topCities'))
+  //   } else {
+  //     largestCities
+  //   }
+  // });
+
+
   const value = { topCities, setTopCities };
 
 
-  useEffect(() => {
-    const apiKey = process.env.REACT_APP_WEATHERSTACK_API_KEY
-    axios
-    .get(`http://api.weatherstack.com/current?access_key=${apiKey}&query=New York&units=f`)
-    .then(res => {
-      console.log(res)
-    })
-    .catch( err => {
-      console.log(err)
-    })
-  },[])
+  // useEffect(() => {
+  //   const apiKey = process.env.REACT_APP_WEATHERSTACK_API_KEY
+  //   axios
+  //   .get(`http://api.weatherstack.com/current?access_key=${apiKey}&query=New York&units=f`)
+  //   .then(res => {
+  //     console.log(res)
+  //   })
+  //   .catch( err => {
+  //     console.log(err)
+  //   })
+  // },[])
 
   // updateItem = () => {
   //   setTopCities(topCities => {

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+
 export const Title = styled.h3`
     font-Size: 20px;
     margin: 0;
@@ -21,3 +22,4 @@ export const CardContainer = styled.div`
     margin: 5px 10px;
     padding: 5px;
 `
+
