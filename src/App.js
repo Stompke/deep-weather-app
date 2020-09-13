@@ -1,11 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
+import { Link, Route } from 'react-router-dom';
 import './App.css';
 import { UserProvider } from './utils/MyContext';
 
 
+
 // Components
 import CityCard from './components/CityCard/CityCard';
+import CityPage from './components/CityPage/CityPage';
+import Dashboard from './components/Dashboard/Dashboard';
 
 function App() {
 
@@ -67,9 +71,12 @@ function App() {
   return (
     <UserProvider  value={value}>
       <div className="App">
+        <Link to='/'>Dashboard</Link>
         <header className="App-header">
-          <h2>Top Cities</h2>
-          {topCities.map(item => <CityCard key={item.name} data={item} />)}
+
+          <Route exact path='/' component={Dashboard} />
+          {/* <Route path='/page' component={CityPage}/> */}
+          <Route path='/:city'><CityPage /></Route>
         </header>
       </div>
     </UserProvider>

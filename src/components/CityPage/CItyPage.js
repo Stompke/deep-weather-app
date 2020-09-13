@@ -1,12 +1,13 @@
 import React from 'react';
-
+import { useParams } from 'react-router-dom';
 import { container } from './CityPageStyles';
 
-const CityPage = (props) => {
+const CityPage = () => {
+    let { city } = useParams();
 
     return (
         <>  
-        <h1>City Page {props.title}</h1>
+        <h1>{city}</h1>
         </>
     )
 }

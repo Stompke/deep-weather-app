@@ -19,13 +19,19 @@ const CityCard = (props) => {
           if (res.data.error.code !== 104){
             setCityData(res.data)
           } else {
-            setCityData({current:{temperature:100}})
+            setCityData({current:{city: props.data.name ,temperature:100}})
           }
+
+          
         })
         .catch( err => {
           console.log(err)
         })
       },[])
+
+    useEffect(() => {
+      localStorage.setItem(props.data.name, JSON.stringify(cityData))
+    },[cityData])
 
     const deleteTopCity = () => {
       let current = data.topCities
