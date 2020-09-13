@@ -13,9 +13,9 @@ import Dashboard from './components/Dashboard/Dashboard';
 function App() {
 
   const largestCities = [
-    {name: "New York", temp: 32},
-    {name: "Los Angeles", temp: null},
-    {name: "Chicago", temp: null},
+    {name: "New York"},
+    {name: "Los Angeles"},
+    {name: "Chicago"},
     // {name: "Houston", temp: null},
     // {name: "Phoenix", temp: null},
     // {name: "Philadelphia", temp: null},
@@ -23,7 +23,7 @@ function App() {
     // {name: "San Diego", temp: null},
     // {name: "Dallas", temp: null},
     // {name: "San Jose", temp: null},
-    {name: "Austin", temp: 89},
+    {name: "Austin"},
     // {name: "Jacksonville", temp: null},
     // {name: "Fort Worth", temp: null},
     // {name: "Columbus", temp: null},
