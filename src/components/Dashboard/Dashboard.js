@@ -22,7 +22,7 @@ const Dashboard = () => {
         axios
         .get(`http://api.weatherstack.com/current?access_key=${apiKey}&query=${searchQuery}&units=f`)
         .then(res => {
-            console.log(res)
+            // console.log(res)
             setSearchCity(res.data)
         })
         .catch(err => {
@@ -33,10 +33,19 @@ const Dashboard = () => {
 
     return (
         <>
+
             <h2>Search:</h2>
-            <input value={searchQuery} onChange={onChangeHandler} onSubmit={onSubmitHandler} />
-            <button onClick={onSubmitHandler}>Go</button>
-            {searchCity.location && <TopCityCard key={searchCity.location.name} data={searchCity.location} />}
+
+            { window.navigator.onLine ? <>
+                <input value={searchQuery} onChange={onChangeHandler} onSubmit={onSubmitHandler} />
+                <button onClick={onSubmitHandler}>Go</button>
+                </>
+            :
+                <h4>Must be online to search cities</h4>
+            }
+
+            {searchCity.location && <TopCityCard key={searchCity.location.name} data={searchCity.location.name} />}
+            
 
             <h2>Favorite Cities</h2>
             {favoriteCities.map(item => <FavoriteCityCard key={item} data={item} />)}
