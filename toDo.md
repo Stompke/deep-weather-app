@@ -8,7 +8,7 @@
 - [✅] Click on City to view more data/info
 - [✅] Ability to write/edit/delete notes on single city data page
 - [✅] Search field to search for other cities
-- [✅] Add/ Remove Favorite Cities
+- [✅] Add/ Remove Favorite Cities (also Alphabetical)
 - [✅] Works Offline
 
 ## Mid - Senior Level Developers

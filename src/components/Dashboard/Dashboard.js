@@ -27,8 +27,8 @@ const Dashboard = () => {
         axios
         .get(`http://api.weatherstack.com/current?access_key=${apiKey}&query=${searchQuery}&units=f`)
         .then(res => {
-            setSearchCity(res.data)
-            setIsSearching(false)
+            setSearchCity(res.data, setIsSearching(false))
+            
         })
         .catch(err => {
             console.log(err)
