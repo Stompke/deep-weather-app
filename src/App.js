@@ -16,18 +16,18 @@ function App() {
   "New York",
     "Los Angeles",
     "Chicago",
-    // {name: "Houston", temp: null},
-    // {name: "Phoenix", temp: null},
-    // {name: "Philadelphia", temp: null},
-    // {name: "San Antonio", temp: null},
-    // {name: "San Diego", temp: null},
-    // {name: "Dallas", temp: null},
-    // {name: "San Jose", temp: null},
+    // {"Houston"},
+    // {"Phoenix"},
+    // {"Philadelphia"},
+    // {nameSan Antonio"},
+    // {nameSan Diego"},
+    // {"Dallas"},
+    // {nameSan Jose"},
     "Austin",
-    // {name: "Jacksonville", temp: null},
-    // {name: "Fort Worth", temp: null},
-    // {name: "Columbus", temp: null},
-    // {name: "Charlotte", temp: null}
+    // {"Jacksonville"},
+    // {nameFort Worth"},
+    // {"Columbus"},
+    // {"Charlotte"},
   ]
 
   const favoriteCitiesInit = [
@@ -40,10 +40,13 @@ function App() {
 
   const [topCities, setTopCities] = useState( localStorage.getItem('topCities') ? JSON.parse(localStorage.getItem('topCities')) : largestCities );
   const [favoriteCities, setFavoriteCities] = useState( localStorage.getItem('favoriteCities') ? JSON.parse(localStorage.getItem('favoriteCities')) : favoriteCitiesInit );
+  const sortThenSetFavorite = (data) => {
+
+    setFavoriteCities(data.sort())
+  }
 
 
-
-  const value = { topCities, setTopCities, favoriteCities, setFavoriteCities };
+  const value = { topCities, setTopCities, favoriteCities, setFavoriteCities, sortThenSetFavorite };
 
 
 
