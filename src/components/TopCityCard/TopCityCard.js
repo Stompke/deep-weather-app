@@ -40,15 +40,6 @@ const TopCityCard = (props) => {
           })
         }
       },[])
-      
-
-      // Does not need to run when local storage is already there
-      
-      // useEffect(() => {
-      //   localStorage.setItem(props.data.name, JSON.stringify(cityData))
-      //   // console.log('setting city LS: ', cityData)
-      // },[cityData])
-
 
 
     const deleteTopCity = () => {
@@ -65,7 +56,7 @@ const TopCityCard = (props) => {
     }
 
 
-  
+  console.log('from TopCityCard: ', props)
 
     return (<>
       {cityData.current ?
@@ -75,7 +66,7 @@ const TopCityCard = (props) => {
             </Link>
             {!data.favoriteCities.includes(props.data) && <button onClick={addFavorite} >♥️</button>}
              
-            <button onClick={deleteTopCity}>x</button>
+            {props.canRemove && <button onClick={deleteTopCity}>x</button>}
         </CardContainer>
         : ""}
         </>

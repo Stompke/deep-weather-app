@@ -1,15 +1,18 @@
 import React ,{ useEffect, useContext, useState } from 'react';
 import UserContext from '../../utils/MyContext';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 // COMPONENTS
 import TopCityCard from '../TopCityCard/TopCityCard';
 import FavoriteCityCard from '../FavoriteCityCard/FavoriteCityCard';
 
 const Dashboard = () => {
-
+    let history = useHistory();
+    const [ currentCity, setCurrentCity ] = useState('')
     const [ searchQuery, setSearchQuery ] = useState('')
     const [ searchCity, setSearchCity ] = useState({})
+    const [ isSearching, setIsSearching ] = useState(false)
 
     const {topCities, favoriteCities} = useContext(UserContext)
 
@@ -18,59 +21,57 @@ const Dashboard = () => {
     }
 
     const onSubmitHandler = () => {
+        setSearchCity('')
         const apiKey = process.env.REACT_APP_WEATHERSTACK_API_KEY
+        setIsSearching(true)
         axios
         .get(`http://api.weatherstack.com/current?access_key=${apiKey}&query=${searchQuery}&units=f`)
         .then(res => {
-            // console.log(res)
             setSearchCity(res.data)
+            setIsSearching(false)
         })
         .catch(err => {
             console.log(err)
+            setIsSearching(false)
         })
     }
 
     useEffect(() => {
-
-        navigator.geolocation.getCurrentPosition(
-             function(position) {
-              console.log(position);
-              let lat =  position.coords.latitude
-              let lon =  position.coords.longitude
-              axios
-            //   .get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${lat},${lon}.json?access_token=${process.env.REACT_APP_MAPBOX_API}`)
-              .get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lon}&key=${process.env.REACT_APP_GOOGLEMAPS_API}`)
-              .then(res => {
-                  console.log(res)
-                  let city = res.data.results[0].address_components[2].short_name
-                  const apiKey = process.env.REACT_APP_WEATHERSTACK_API_KEY
+        let city = localStorage.getItem('currentCity')
+        if (!city) {
+            navigator.geolocation.getCurrentPosition(
+                 function(position) {
+                  console.log(position);
+                  let lat =  position.coords.latitude
+                  let lon =  position.coords.longitude
                   axios
-                  .get(`http://api.weatherstack.com/current?access_key=${apiKey}&query=${city}&units=f`)
+                  .get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lon}&key=${process.env.REACT_APP_GOOGLEMAPS_API}`)
                   .then(res => {
-                      // console.log(res)
-                      setSearchCity(res.data)
+                      console.log(res)
+                       city = res.data.results[0].address_components[2].short_name
+                      //   Save current currentCity to local storage
+                      localStorage.setItem('currentCity', city);
+                      // route to currentCity Weather Page after data is received from location
+                      history.push(`/${city}`);
                   })
                   .catch(err => {
                       console.log(err)
                   })
-              })
-              .catch(err => {
-                //   console.log(err)
-              })
-            },
-            function(error) {
-              console.error("Error Code = " + error.code + " - " + error.message);
-            }
-          );
-
-        //   Reverse geocoding endpoint https://api.mapbox.com/geocoding/v5/{endpoint}/{longitude},{latitude}.json
+                },
+                function(error) {
+                  console.error("Error Code = " + error.code + " - " + error.message);
+                }
+              );
+        } else {
+            setCurrentCity(city);
+        }
         
 
     },[])
-
+console.log(currentCity)
     return (
         <>
-
+            {currentCity && <p>Current City: <TopCityCard canRemove={false} key={currentCity} data={currentCity} /></p>}
             <h2>Search:</h2>
 
             { window.navigator.onLine ? <>
@@ -80,15 +81,15 @@ const Dashboard = () => {
             :
                 <h4>Must be online to search cities</h4>
             }
-
-            {searchCity.location && <TopCityCard key={searchCity.location.name} data={searchCity.location.name} />}
+            {isSearching && <p>searching...</p>}
+            {searchCity.location && <TopCityCard canRemove={false} key={searchCity.location.name} data={searchCity.location.name} />}
             
 
             <h2>Favorite Cities</h2>
             {favoriteCities.map(item => <FavoriteCityCard key={item} data={item} />)}
 
             <h2>Top Cities</h2>
-            {topCities.map(item => <TopCityCard key={item.name} data={item} />)}
+            {topCities.map(item => <TopCityCard canRemove={true} key={item.name} data={item} />)}
         </>
     )
 }

@@ -10,6 +10,8 @@ const FavoriteCityCard = props => {
     const data = useContext(UserContext)
 
     const [cityData, setCityData] = useState({})
+    const [ noData, setNoData ] = useState(false)
+
     // Possiby change to useReducer
     useEffect(() => {
 
@@ -35,6 +37,7 @@ const FavoriteCityCard = props => {
           })
           .catch( err => {
             console.log(err)
+            setNoData(true)
           })
         }
       },[])
@@ -58,15 +61,14 @@ const FavoriteCityCard = props => {
   
 
     return (<>
-      {cityData.current ?
+      
         <CardContainer>
             <Link to={`/${props.data}`} >
-              <Title>{props.data}</Title> <Temp> {cityData.current.temperature} </Temp> 
+              <Title>{props.data}</Title> <Temp> {cityData.current ? cityData.current.temperature : '...'} </Temp> 
             </Link>
 
             <button onClick={deleteFavoriteCity}>x</button>
         </CardContainer>
-        : ""}
         </>
     )
 }
