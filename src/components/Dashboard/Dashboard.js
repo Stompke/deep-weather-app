@@ -1,4 +1,4 @@
-import React ,{ useContext, useState } from 'react';
+import React ,{ useEffect, useContext, useState } from 'react';
 import UserContext from '../../utils/MyContext';
 import axios from 'axios';
 
@@ -30,6 +30,43 @@ const Dashboard = () => {
         })
     }
 
+    useEffect(() => {
+
+        navigator.geolocation.getCurrentPosition(
+             function(position) {
+              console.log(position);
+              let lat =  position.coords.latitude
+              let lon =  position.coords.longitude
+              axios
+            //   .get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${lat},${lon}.json?access_token=${process.env.REACT_APP_MAPBOX_API}`)
+              .get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lon}&key=${process.env.REACT_APP_GOOGLEMAPS_API}`)
+              .then(res => {
+                  console.log(res)
+                  let city = res.data.results[0].address_components[2].short_name
+                  const apiKey = process.env.REACT_APP_WEATHERSTACK_API_KEY
+                  axios
+                  .get(`http://api.weatherstack.com/current?access_key=${apiKey}&query=${city}&units=f`)
+                  .then(res => {
+                      // console.log(res)
+                      setSearchCity(res.data)
+                  })
+                  .catch(err => {
+                      console.log(err)
+                  })
+              })
+              .catch(err => {
+                //   console.log(err)
+              })
+            },
+            function(error) {
+              console.error("Error Code = " + error.code + " - " + error.message);
+            }
+          );
+
+        //   Reverse geocoding endpoint https://api.mapbox.com/geocoding/v5/{endpoint}/{longitude},{latitude}.json
+        
+
+    },[])
 
     return (
         <>

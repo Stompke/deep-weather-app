@@ -37,22 +37,6 @@ function App() {
   largestCities.sort()
 
 
-  // largestCities.sort(function(a, b) {
-  //   const nameA = a.name.toUpperCase();
-  //   const nameB = b.name.toUpperCase();
-
-  //   if(nameA < nameB) {
-  //     return -1
-  //   }
-  //   if (nameA > nameB) {
-  //     return 1;
-  //   }
-
-  //   return 0 
-
-  // });
-
-
 
   const [topCities, setTopCities] = useState( localStorage.getItem('topCities') ? JSON.parse(localStorage.getItem('topCities')) : largestCities );
   const [favoriteCities, setFavoriteCities] = useState( localStorage.getItem('favoriteCities') ? JSON.parse(localStorage.getItem('favoriteCities')) : favoriteCitiesInit );
