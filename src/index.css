@@ -11,3 +11,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* @font-face {
+  font-family: 'Font Awesome';
+  src: local('Font Awesome'), url(./assets/14126655f43628074be1976d86f13eae\ copy.ttf) format('truetype');
+} */

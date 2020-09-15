@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom';
 // COMPONENTS
 import TopCityCard from '../TopCityCard/TopCityCard';
 import FavoriteCityCard from '../FavoriteCityCard/FavoriteCityCard';
+import { SearchTitle, SearchContainer, SearchInput } from './DashboardStyles';
 
 const Dashboard = () => {
     let history = useHistory();
@@ -17,10 +18,12 @@ const Dashboard = () => {
     const {topCities, favoriteCities} = useContext(UserContext)
 
     const onChangeHandler = e => {
+
         setSearchQuery(e.target.value)
     }
 
-    const onSubmitHandler = () => {
+    const onSubmitHandler = e => {
+        e.preventDefault()
         setSearchCity('')
         const apiKey = process.env.REACT_APP_WEATHERSTACK_API_KEY
         setIsSearching(true)
@@ -71,19 +74,24 @@ const Dashboard = () => {
 console.log(currentCity)
     return (
         <>
-            {currentCity && <p>Current City: <TopCityCard canRemove={false} key={currentCity} data={currentCity} /></p>}
-            <h2>Search:</h2>
-
+            <SearchContainer>
+                <SearchTitle>Search:</SearchTitle>
             { window.navigator.onLine ? <>
-                <input value={searchQuery} onChange={onChangeHandler} onSubmit={onSubmitHandler} />
-                <button onClick={onSubmitHandler}>Go</button>
+                <form onSubmit={onSubmitHandler}>
+                    <SearchInput  value={searchQuery} onChange={onChangeHandler} onSubmit={onSubmitHandler} />
+
+                </form>
                 </>
             :
-                <h4>Must be online to search cities</h4>
-            }
+            <h4>Must be online to search cities</h4>
+        }
+
+            </SearchContainer>
+
             {isSearching && <p>searching...</p>}
             {searchCity.location && <TopCityCard canRemove={false} key={searchCity.location.name} data={searchCity.location.name} />}
             
+            {currentCity && <p>Current City: <TopCityCard canRemove={false} key={currentCity} data={currentCity} /></p>}
 
             <h2>Favorite Cities</h2>
             {favoriteCities.map(item => <FavoriteCityCard key={item} data={item} />)}
