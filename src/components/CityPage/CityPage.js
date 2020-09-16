@@ -17,7 +17,7 @@ const CityPage = () => {
     useEffect(() => {
             const apiKey = process.env.REACT_APP_WEATHERSTACK_API_KEY
             axios
-            .get(`http://api.weatherstack.com/current?access_key=${apiKey}&query=${city}&units=f`)
+            .get(`https://api.weatherstack.com/current?access_key=${apiKey}&query=${city}&units=f`)
             .then(res => {
                 const newCityData = {current: res.data.current, location: res.data.location, request: res.data.request}
                 let cityLocalStorage = JSON.parse(localStorage.getItem(city))

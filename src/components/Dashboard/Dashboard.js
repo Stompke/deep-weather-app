@@ -30,7 +30,7 @@ const Dashboard = () => {
         const apiKey = process.env.REACT_APP_WEATHERSTACK_API_KEY
         setIsSearching(true)
         axios
-        .get(`http://api.weatherstack.com/current?access_key=${apiKey}&query=${searchQuery}&units=f`)
+        .get(`https://api.weatherstack.com/current?access_key=${apiKey}&query=${searchQuery}&units=f`)
         .then(res => {
             setSearchCity(res.data, setIsSearching(false))
             

@@ -20,7 +20,7 @@ const TopCityCard = (props) => {
       const apiKey = process.env.REACT_APP_WEATHERSTACK_API_KEY
 
       axios
-      .get(`http://api.weatherstack.com/current?access_key=${apiKey}&query=${props.data}&units=f`)
+      .get(`https://api.weatherstack.com/current?access_key=${apiKey}&query=${props.data}&units=f`)
       .then(res => {
           setCityData(res.data)
           localStorage.setItem(props.data, JSON.stringify(res.data))
