@@ -3,7 +3,9 @@ import UserContext from '../../utils/MyContext'
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-import {Title, Temp, CardContainer} from './TopCityCardStyles';
+import {Title, Temp, CardContainer, RemoveButton, FavoriteButton} from '../FavoriteCityCard/FavoriteCityCardStyles';
+import { FaBan } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa";
 
 const TopCityCard = (props) => {
 
@@ -63,9 +65,9 @@ const TopCityCard = (props) => {
             <Link to={`/${props.data}`} >
               <Title>{props.data}</Title> <Temp> {cityData.current.temperature} </Temp> 
             </Link>
-            {!data.favoriteCities.includes(props.data) && <button onClick={addFavorite} >♥️</button>}
+            {!data.favoriteCities.includes(props.data) && <FavoriteButton onClick={addFavorite} ><FaHeart /></FavoriteButton>}
              
-            {props.canRemove && <button onClick={deleteTopCity}>x</button>}
+            {props.canRemove && <RemoveButton onClick={deleteTopCity}><FaBan/></RemoveButton>}
         </CardContainer>
         : ""}
         </>

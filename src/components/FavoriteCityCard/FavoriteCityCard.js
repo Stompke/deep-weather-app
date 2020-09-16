@@ -4,6 +4,8 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 import {Title, Temp, CardContainer, RemoveButton} from '../FavoriteCityCard/FavoriteCityCardStyles';
+import { FaBan } from "react-icons/fa";
+
 
 const FavoriteCityCard = props => {
 
@@ -64,7 +66,7 @@ const FavoriteCityCard = props => {
               <Title>{props.data}</Title> <Temp> {cityData.current ? `${cityData.current.temperature}º` : '.'} </Temp> 
             </Link>
 
-            <RemoveButton onClick={deleteFavoriteCity}><i class="fal fa-ban"></i></RemoveButton>
+    <RemoveButton onClick={deleteFavoriteCity}><FaBan/></RemoveButton>
         </CardContainer>
         </>
     )

@@ -16,7 +16,7 @@ export const CardContainer = styled.div`
     flex-fow: row;
     align-items: center;
     justify-content: space-between;
-    width: 200px;
+    width: 250px;
     background-color: #242424;
     border-radius: 5px;
     margin: 5px 10px;
@@ -29,8 +29,24 @@ export const CardContainer = styled.div`
         width: 100%;
         margin-right: 10px;
     }
+
+    &:hover {
+        background-color: #fe752f; 
+    }
 `
 export const RemoveButton = styled.button`
     background: transparent;
     border: none;
+    &:hover {
+        cursor: pointer;
+        color: red !important;
+    }
+`
+export const FavoriteButton = styled.button`
+    background: transparent;
+    border: none;
+    &:hover {
+        cursor: pointer;
+        color: red !important;
+    }
 `
