@@ -11,24 +11,33 @@ import CityPage from './components/CityPage/CityPage';
 import Dashboard from './components/Dashboard/Dashboard';
 
 function App() {
+  console.log(process.env.NODE_ENV)
+  let largestCities
+  if(process.env.NODE_ENV == 'production') {
+     largestCities = [
+    "New York",
+      "Los Angeles",
+      "Chicago",
+      "Houston",
+      "Phoenix",
+      "Philadelphia",
+      "San Antonio",
+      "San Diego",
+      "Dallas",
+      "San Jose",
+      "Austin",
+      "Jacksonville",
+      "Fort Worth",
+      "Columbus",
+      "Charlotte",
+    ]
 
-  const largestCities = [
-  "New York",
-    "Los Angeles",
-    "Chicago",
-    // {"Houston"},
-    // {"Phoenix"},
-    // {"Philadelphia"},
-    // {nameSan Antonio"},
-    // {nameSan Diego"},
-    // {"Dallas"},
-    // {nameSan Jose"},
-    "Austin",
-    // {"Jacksonville"},
-    // {nameFort Worth"},
-    // {"Columbus"},
-    // {"Charlotte"},
-  ]
+  } else {
+     largestCities = [
+      "Chicago",
+      "Austin",
+    ]
+  }
 
   const favoriteCitiesInit = [
     "Chandler"

@@ -19,11 +19,11 @@ const CityPage = () => {
             axios
             .get(`http://api.weatherstack.com/current?access_key=${apiKey}&query=${city}&units=f`)
             .then(res => {
+                const newCityData = {current: res.data.current, location: res.data.location, request: res.data.request}
                 localStorage.setItem(city, JSON.stringify({
                         ...cityData,
                         ...newCityData
                     }))
-                const newCityData = {current: res.data.current, location: res.data.location, request: res.data.request}
                 setCityData(
                         {
                             ...cityData,
