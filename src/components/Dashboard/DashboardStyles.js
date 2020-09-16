@@ -15,10 +15,10 @@ export const SearchTitle = styled.h3`
 `
 
 export const SearchInput = styled.input`
-    border-radius: 10px;
+    border-radius: 5px;
     line-height: 20px;
+    color: #000;
     &:focus {
-        background-color: #5d89e0e8;
         outline: none;
     }
 `

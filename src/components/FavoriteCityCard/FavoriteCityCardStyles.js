@@ -16,7 +16,8 @@ export const CardContainer = styled.div`
     flex-fow: row;
     align-items: center;
     justify-content: space-between;
-    width: 250px;
+    min-width: 250px;
+    width: 50%;
     background-color: #242424;
     border-radius: 5px;
     margin: 5px 10px;
@@ -40,6 +41,10 @@ export const RemoveButton = styled.button`
     &:hover {
         cursor: pointer;
         color: red !important;
+
+        path {
+            color: red;
+        }
     }
 `
 export const FavoriteButton = styled.button`
@@ -48,5 +53,11 @@ export const FavoriteButton = styled.button`
     &:hover {
         cursor: pointer;
         color: red !important;
+
+        path {
+            color: red;
+        }
     }
+
+
 `
