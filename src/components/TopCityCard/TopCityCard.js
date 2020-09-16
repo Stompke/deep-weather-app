@@ -62,7 +62,7 @@ const TopCityCard = (props) => {
       {cityData.current ?
         <CardContainer>
             <Link to={`/${props.data}`} >
-              <Title>{props.data}</Title> <Temp> {cityData.current.temperature} </Temp> 
+              <Title>{props.data}</Title> <Temp> {cityData.current.temperature}º </Temp> 
             </Link>
             {!data.favoriteCities.includes(props.data) && <FavoriteButton onClick={addFavorite} ><FaHeart /></FavoriteButton>}
              

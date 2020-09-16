@@ -20,13 +20,16 @@ const CityPage = () => {
             .get(`http://api.weatherstack.com/current?access_key=${apiKey}&query=${city}&units=f`)
             .then(res => {
                 const newCityData = {current: res.data.current, location: res.data.location, request: res.data.request}
+                let cityLocalStorage = JSON.parse(localStorage.getItem(city))
+
                 localStorage.setItem(city, JSON.stringify({
-                        ...cityData,
+                        ...cityLocalStorage,
                         ...newCityData
                     }))
+
                 setCityData(
                         {
-                            ...cityData,
+                            ...cityLocalStorage,
                             ...newCityData
                         }
                     ) 
