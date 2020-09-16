@@ -65,9 +65,9 @@ const FavoriteCityCard = props => {
 
     return (<>
       
-        <CardContainer>
-            <Link to={`/${props.data}`} >
-              <Title>{props.data}</Title> <Temp> {cityData.current ? `${cityData.current.temperature}º` : '.'} </Temp> 
+        <CardContainer data-testid="favoriteCityCard">
+            <Link to={`/${props.data}`}  >
+              <Title data-testid="favoriteCityCardLink">{props.data}</Title> <Temp> {cityData.current ? `${cityData.current.temperature}º` : '.'} </Temp> 
             </Link>
 
     <RemoveButton onClick={deleteFavoriteCity}><FaBan/></RemoveButton>

@@ -43,12 +43,12 @@ const CityNotes = props => {
         <NotesContainer>
             
             <TitleContainer>
-                <Title>Notes: </Title>
-                {editing ? <><FaCheck onClick={editHandler} /><FaTrash onClick={deleteNotes} /></> : <FaEdit onClick={editHandler}/>}
+                <Title data-testid="notes-title">Notes: </Title>
+                {editing ? <><FaCheck data-testid="checkButton" onClick={editHandler} /><FaTrash data-testid="deleteButton" onClick={deleteNotes} /></> : <FaEdit data-testid="editButton" onClick={editHandler}/>}
             </TitleContainer>
 
             <InputContainer>
-                {editing ? <input onChange={onChangeHandler} value={notes}/> : <p>{props.cityData.notes}</p> }
+                {editing ? <input data-testid="notesInput" onChange={onChangeHandler} value={notes}/> : <p data-testid="notes-paragraph">{props.cityData.notes}</p> }
             </InputContainer>
             
 

@@ -10,6 +10,7 @@ import { FaChevronLeft } from "react-icons/fa";
 
 const CityPage = () => {
     let { city } = useParams();
+
     const [ cityData, setCityData ] = useState({});
     const [ noData, setNoData ] = useState(false)
 
@@ -58,7 +59,7 @@ const CityPage = () => {
 
                 <div>
                     
-                    <h1>{city}</h1> <img src={cityData.current.weather_icons[0]} alt="weather icon"/>
+                    <h1 data-testid="cityPageTitle">{city}</h1> <img src={cityData.current.weather_icons[0]} alt="weather icon"/>
         <h4>{cityData.location.region}{cityData.location.region && ","} {cityData.location.country}</h4>
                 </div>
 

@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
-import { Link, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
+
 import './App.css';
 import { UserProvider } from './utils/MyContext';
 
@@ -60,7 +61,9 @@ function App() {
 
 
   return (
+    <Router>
     <UserProvider  value={value}>
+
       <div className="App">
         
         <header className="App-header">
@@ -71,6 +74,7 @@ function App() {
         </header>
       </div>
     </UserProvider>
+    </Router>
   );
 }
 

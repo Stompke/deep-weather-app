@@ -14,8 +14,8 @@
 ## Mid - Senior Level Developers
 - [✅] Get Users current Location
 - [] Create Unit Testing
-- [] Style with your own CSS 😲
+- [✅] Style with your own CSS 😲
 
 ## Document
-- [] Screenshots and Documentation in a Readme File
+- [✅] Screenshots and Documentation in a Readme File
 - [] Video Walkthrough of Application

@@ -89,15 +89,15 @@ const Dashboard = () => {
             </SearchContainer>
 
             {isSearching && <p>searching...</p>}
-            {searchCity.location && <TopCityCard canRemove={false} key={searchCity.location.name} data={searchCity.location.name} />}
+            {searchCity.location && <TopCityCard className='searchCity' canRemove={false} key={searchCity.location.name} data={searchCity.location.name} />}
             
-            {currentCity && <p>Current City: <TopCityCard canRemove={false} key={currentCity} data={currentCity} /></p>}
+            {currentCity && <p>Current City: <TopCityCard className='currentCity' canRemove={false} key={`currentCity:${currentCity}`} data={currentCity} /></p>}
 
             <h2>Favorite Cities</h2>
-            {favoriteCities.map(item => <FavoriteCityCard key={item} data={item} />)}
+            {favoriteCities.map(item => <FavoriteCityCard  id='favoriteCity' key={`favoriteCity:${item}`} data={item} />)}
 
             <h2>Top Cities</h2>
-            {topCities.map(item => <TopCityCard canRemove={true} key={item.name} data={item} />)}
+            {topCities.map(item => <TopCityCard canRemove={true} key={`topCity:${item}`} data={item} />)}
         </>
     )
 }
