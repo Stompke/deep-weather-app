@@ -13,7 +13,7 @@
 
 ## Mid - Senior Level Developers
 - [✅] Get Users current Location
-- [] Create Unit Testing
+- [✅] Create Unit Testing
 - [✅] Style with your own CSS 😲
 
 ## Document
