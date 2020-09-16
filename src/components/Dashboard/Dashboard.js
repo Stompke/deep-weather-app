@@ -21,7 +21,6 @@ const Dashboard = () => {
     const {topCities, favoriteCities} = useContext(UserContext)
 
     const onChangeHandler = e => {
-
         setSearchQuery(e.target.value)
     }
 
@@ -71,10 +70,8 @@ const Dashboard = () => {
         } else {
             setCurrentCity(city);
         }
-        
-
     },[])
-console.log(currentCity)
+
     return (
         <>
             <SearchContainer>

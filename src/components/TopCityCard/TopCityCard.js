@@ -11,36 +11,31 @@ const TopCityCard = (props) => {
     const data = useContext(UserContext)
 
     const [cityData, setCityData] = useState({})
+    const [ noData, setNoData ] = useState(false)
 
 
-    // Possiby change to useReducer
+
+
     useEffect(() => {
+      const apiKey = process.env.REACT_APP_WEATHERSTACK_API_KEY
 
-        const apiKey = process.env.REACT_APP_WEATHERSTACK_API_KEY
-
+      axios
+      .get(`http://api.weatherstack.com/current?access_key=${apiKey}&query=${props.data}&units=f`)
+      .then(res => {
+          setCityData(res.data)
+          localStorage.setItem(props.data, JSON.stringify(res.data))
+      })
+      .catch( err => {
+        console.log(err)
         if (localStorage.getItem(props.data) &&  localStorage.getItem(props.data) != "{}") {
           setCityData(JSON.parse(localStorage.getItem(props.data)))
+          console.log('grabbed from local storage')
         } else {
-          axios
-          .get(`http://api.weatherstack.com/current?access_key=${apiKey}&query=${props.data}&units=f`)
-          .then(res => {
-  
-            if (!res.data.error){
-              setCityData(res.data)
-              localStorage.setItem(props.data, JSON.stringify(res.data))
-
-            } else {
-              // ran out of API calls had to use fake data
-              setCityData({current:{city: props.data ,temperature:100}})
-            }
-  
-            
-          })
-          .catch( err => {
-            console.log(err)
-          })
+          setNoData(true)
         }
-      },[])
+      })
+    
+  },[])
 
 
     const deleteTopCity = () => {
@@ -62,7 +57,7 @@ const TopCityCard = (props) => {
       {cityData.current ?
         <CardContainer>
             <Link to={`/${props.data}`} >
-              <Title>{props.data}</Title> <Temp> {cityData.current.temperature}º </Temp> 
+              <Title>{props.data}</Title> <Temp> {cityData.current ? `${cityData.current.temperature}º` : '.'}  </Temp> 
             </Link>
             {!data.favoriteCities.includes(props.data) && <FavoriteButton onClick={addFavorite} ><FaHeart /></FavoriteButton>}
              

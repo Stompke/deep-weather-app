@@ -14,34 +14,26 @@ const FavoriteCityCard = props => {
     const [cityData, setCityData] = useState({})
     const [ noData, setNoData ] = useState(false)
 
-    // Possiby change to useReducer
+
     useEffect(() => {
+          const apiKey = process.env.REACT_APP_WEATHERSTACK_API_KEY
 
-        const apiKey = process.env.REACT_APP_WEATHERSTACK_API_KEY
-
-        if (localStorage.getItem(props.data) &&  localStorage.getItem(props.data) != "{}") {
-          setCityData(JSON.parse(localStorage.getItem(props.data)))
-        } else {
           axios
           .get(`http://api.weatherstack.com/current?access_key=${apiKey}&query=${props.data}&units=f`)
           .then(res => {
-  
-            if (!res.data.error){
               setCityData(res.data)
               localStorage.setItem(props.data, JSON.stringify(res.data))
-
-            } else {
-              // ran out of API calls had to use fake data
-              setCityData({current:{city: props.data ,temperature:100, isFake: true}})
-            }
-  
-            
           })
           .catch( err => {
             console.log(err)
-            setNoData(true)
+            if (localStorage.getItem(props.data) &&  localStorage.getItem(props.data) != "{}") {
+              setCityData(JSON.parse(localStorage.getItem(props.data)))
+              console.log('grabbed from local storage')
+            } else {
+              setNoData(true)
+            }
           })
-        }
+        
       },[])
       
 
