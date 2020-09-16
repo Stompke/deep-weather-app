@@ -2,6 +2,9 @@ import React ,{ useEffect, useContext, useState } from 'react';
 import UserContext from '../../utils/MyContext';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import { FaSearch } from "react-icons/fa";
+
+
 
 // COMPONENTS
 import TopCityCard from '../TopCityCard/TopCityCard';
@@ -75,7 +78,7 @@ console.log(currentCity)
     return (
         <>
             <SearchContainer>
-                <SearchTitle>Search:</SearchTitle>
+                <SearchTitle><FaSearch /></SearchTitle>
             { window.navigator.onLine ? <>
                 <form onSubmit={onSubmitHandler}>
                     <SearchInput  value={searchQuery} onChange={onChangeHandler} onSubmit={onSubmitHandler} />

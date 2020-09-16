@@ -6,6 +6,10 @@ export const SearchContainer = styled.div`
     align-items: center;
     width: 100%;
     padding: 5px;
+    @media (max-width: 600px) {
+        width: 90%;
+        justify-content: center;
+      }
     `
 
 export const SearchTitle = styled.h3`
@@ -16,9 +20,11 @@ export const SearchTitle = styled.h3`
 
 export const SearchInput = styled.input`
     border-radius: 5px;
-    line-height: 20px;
+    line-height: 28px;
     color: #000;
     &:focus {
         outline: none;
     }
+
+
 `

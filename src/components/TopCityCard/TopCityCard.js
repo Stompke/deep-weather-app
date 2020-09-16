@@ -4,8 +4,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 import {Title, Temp, CardContainer, RemoveButton, FavoriteButton} from '../FavoriteCityCard/FavoriteCityCardStyles';
-import { FaBan } from "react-icons/fa";
-import { FaHeart } from "react-icons/fa";
+import { FaBan, FaHeart } from "react-icons/fa";
 
 const TopCityCard = (props) => {
 

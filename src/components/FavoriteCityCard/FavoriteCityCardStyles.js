@@ -23,6 +23,10 @@ export const CardContainer = styled.div`
     margin: 5px 10px;
     padding: 5px;
 
+    @media (max-width: 600px) {
+        width: 90%;
+      }
+
     a {
         text-decoration: none;
         display: flex;

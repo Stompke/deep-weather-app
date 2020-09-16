@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
-import { Container } from './CityPageStyles';
+import { useParams, Link, Redirect } from 'react-router-dom';
+import { Container, BackContainer } from './CityPageStyles';
+
 
 // COMPONENTS
 import CityNotes from './CityNotes/CityNotes';
+import { FaChevronLeft } from "react-icons/fa";
 
 const CityPage = () => {
     let { city } = useParams();
@@ -17,10 +19,18 @@ const CityPage = () => {
             axios
             .get(`http://api.weatherstack.com/current?access_key=${apiKey}&query=${city}&units=f`)
             .then(res => {
-                console.log('Retrieved city data for city page', res.data)
-                localStorage.setItem(city, JSON.stringify(res.data))
-                setCityData(res.data) 
-            })
+                localStorage.setItem(city, JSON.stringify({
+                        ...cityData,
+                        ...newCityData
+                    }))
+                const newCityData = {current: res.data.current, location: res.data.location, request: res.data.request}
+                setCityData(
+                        {
+                            ...cityData,
+                            ...newCityData
+                        }
+                    ) 
+                })
             .catch( err => {
                 console.log(err)    
                 if(localStorage.getItem(city)){
@@ -36,17 +46,20 @@ const CityPage = () => {
 
     return (
         <>
+        <BackContainer>
+            <Link to='/'><FaChevronLeft/></Link>
+        </BackContainer>
+
             {cityData.current &&
         <Container>
 
                 <div>
-                    <h1>{city}</h1> 
+                    
+                    <h1>{city}</h1> <img src={cityData.current.weather_icons[0]} alt="weather icon"/>
         <h4>{cityData.location.region}{cityData.location.region && ","} {cityData.location.country}</h4>
-                    <p>Data Received at: {cityData.location.localtime}</p>
                 </div>
 
                 <Container>
-                    <img src={cityData.current.weather_icons[0]} alt="weather icon"/>
                 </Container>
 
                 <div>

@@ -53,7 +53,7 @@ function App() {
   return (
     <UserProvider  value={value}>
       <div className="App">
-        <Link to='/'>Dashboard</Link>
+        
         <header className="App-header">
 
           <Route exact path='/' component={Dashboard} />

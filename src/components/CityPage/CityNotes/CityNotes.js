@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 
+// Components & Styles
+import { FaEdit, FaCheck, FaTrash } from "react-icons/fa";
+import { Title, NotesContainer, TitleContainer, InputContainer } from './CityNotesStyles';
 
 const CityNotes = props => {
 
@@ -26,6 +29,10 @@ const CityNotes = props => {
 
     }
 
+    const deleteNotes = () => {
+        setNotes('')
+    }
+
     const onChangeHandler = e => {
         setNotes(e.target.value)
     }
@@ -33,9 +40,19 @@ const CityNotes = props => {
 
     return (
         <>
-            <h3>Notes: </h3>
-    <button onClick={editHandler}>{editing ? "save" : "edit"}</button>
-    {editing ? <input onChange={onChangeHandler} value={notes}/> : <p>{props.cityData.notes}</p> }
+        <NotesContainer>
+            
+            <TitleContainer>
+                <Title>Notes: </Title>
+                {editing ? <><FaCheck onClick={editHandler} /><FaTrash onClick={deleteNotes} /></> : <FaEdit onClick={editHandler}/>}
+            </TitleContainer>
+
+            <InputContainer>
+                {editing ? <input onChange={onChangeHandler} value={notes}/> : <p>{props.cityData.notes}</p> }
+            </InputContainer>
+            
+
+        </NotesContainer>
     
         </>
     )
