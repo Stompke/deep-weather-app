@@ -1,5 +1,9 @@
 # DEEP WEATHER APP
 
+## ENV VARIABLE NEEDED
+REACT_APP_WEATHERSTACK_API_KEY
+REACT_APP_GOOGLEMAPS_API
+
 ## State is Managed with React.createContext()
 Find the setup for state in /src/utils
 

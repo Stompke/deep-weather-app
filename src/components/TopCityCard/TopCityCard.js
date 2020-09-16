@@ -22,8 +22,20 @@ const TopCityCard = (props) => {
       axios
       .get(`https://api.weatherstack.com/current?access_key=${apiKey}&query=${props.data}&units=f`)
       .then(res => {
-          setCityData(res.data)
-          localStorage.setItem(props.data, JSON.stringify(res.data))
+        const newCityData = {current: res.data.current, location: res.data.location, request: res.data.request}
+        let cityLocalStorage = JSON.parse(localStorage.getItem(props.data))
+
+            localStorage.setItem(props.data, JSON.stringify({
+                    ...cityLocalStorage,
+                    ...newCityData
+                }))
+
+            setCityData(
+                    {
+                        ...cityLocalStorage,
+                        ...newCityData
+                    }
+                ) 
       })
       .catch( err => {
         console.log(err)
