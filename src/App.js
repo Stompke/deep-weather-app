@@ -51,7 +51,7 @@ function App() {
   const [topCities, setTopCities] = useState( localStorage.getItem('topCities') ? JSON.parse(localStorage.getItem('topCities')) : largestCities );
   const [favoriteCities, setFavoriteCities] = useState( localStorage.getItem('favoriteCities') ? JSON.parse(localStorage.getItem('favoriteCities')) : favoriteCitiesInit );
   const sortThenSetFavorite = (data) => {
-
+    
     setFavoriteCities(data.sort())
   }
 
